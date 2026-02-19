@@ -62,6 +62,9 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    env:
+      GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+      GITHUB_ACTOR: ${{ github.actor }}
     steps:
       - name: Deploy to Hetzner K3s via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -72,12 +75,18 @@ jobs:
           proxy_host: ${{ secrets.SSH_PROXY_HOST }}
           proxy_username: ${{ secrets.SSH_USERNAME }}
           proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GHCR_TOKEN,GITHUB_ACTOR
           script: |
-            # Update the deployment with the new image
-            # Note: We rely on 'imagePullPolicy: Always' and the 'latest' tag, 
-            # or we can explicitly set the sha if we want to be more specific.
-            # Restarting the rollout forces a pull of the 'latest' tag.
+            # Create/refresh GHCR pull secret so K8s can pull the image
+            kubectl create secret docker-registry ghcr-pull-secret \
+              --docker-server=ghcr.io \
+              --docker-username=$GITHUB_ACTOR \
+              --docker-password=$GHCR_TOKEN \
+              --namespace=core-services \
+              --dry-run=client -o yaml | kubectl apply -f -
+
+            # Restart rollout to pick up the new image
             kubectl rollout restart deployment/accesseasy-frontend -n core-services
-            
-            # Verify the rollout
-            kubectl rollout status deployment/accesseasy-frontend -n core-services
+
+            # Wait for rollout to complete (max 3 minutes)
+            kubectl rollout status deployment/accesseasy-frontend -n core-services --timeout=180s
