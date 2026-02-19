@@ -1,0 +1,60 @@
+/* src/assets/styles/variables.css */
+:root {
+  --theme-color: #000000;
+  --theme-secondary: #333333;
+  --theme-accent: #666666;
+  --background-color: #ffffff;
+  --card-background: #ffffff;
+
+  --text-dark: #000000;
+  --text-light: #666666;
+  --text-muted: #999999;
+  --text-color: #ffffff;
+  --title: #000000;
+
+  --success: #000000;
+  --warning: #000000;
+  --error: #000000;
+  --info: #000000;
+
+  --dashboard-gradient: linear-gradient(135deg, #000000 0%, #333333 100%);
+  --hover-gradient: linear-gradient(135deg, #333333 0%, #666666 100%);
+}
+
+/* :root {
+  --theme-color: #1e40af;
+  --theme-secondary: #3b82f6;
+  --theme-accent: #60a5fa;
+  --background-color: #f8fafc;
+  --card-background: #ffffff;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --text-muted: #64748b;
+  --text-color: #1e293b;
+  --title: #1e293b;
+  --success: #1e40af;
+  --warning: #3b82f6;
+  --error: #1e40af;
+  --info: #3b82f6;
+  --dashboard-gradient: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  --hover-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+}
+
+.dark-theme {
+  --theme-color: #3b82f6;
+  --theme-secondary: #60a5fa;
+  --theme-accent: #93c5fd;
+  --background-color: #1e293b;
+  --card-background: #2d3748;
+  --text-dark: #f8fafc;
+  --text-light: #e2e8f0;
+  --text-muted: #a0aec0;
+  --text-color: #f8fafc;
+  --title: #f8fafc;
+  --success: #3b82f6;
+  --warning: #60a5fa;
+  --error: #3b82f6;
+  --info: #60a5fa;
+  --dashboard-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  --hover-gradient: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+} */
